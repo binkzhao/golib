@@ -1,4 +1,4 @@
-package datastruct
+package ds
 
 // 共享栈类型
 type SqDoubleStack struct {

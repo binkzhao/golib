@@ -1,4 +1,4 @@
-package datastruct
+package ds
 
 // 顺序存储的栈
 type SqStack struct {

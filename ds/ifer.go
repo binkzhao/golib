@@ -1,4 +1,4 @@
-package datastruct
+package ds
 
 // 元素类型
 type ElemType int

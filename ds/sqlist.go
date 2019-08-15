@@ -1,4 +1,4 @@
-package datastruct
+package ds
 
 // 线性表顺序存储结构
 
