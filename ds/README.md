@@ -40,44 +40,44 @@ for _, value := range x.Elems() {
 }
 ```
 
-## sort
+## Sort
 ```
 // 冒泡排序
-	fmt.Println("冒泡排序")
-	slice := []int{2, 1, 10, 8, 30}
-	ds.BulleSort(slice)
-	fmt.Println(slice)
-	sortSlice := sort.IntSlice([]int{2, 1, 10, 8, 30})
-	ds.BubbleSortUsingSortPackage(sortSlice)
-	fmt.Println(sortSlice)
+fmt.Println("冒泡排序")
+slice := []int{2, 1, 10, 8, 30}
+ds.BulleSort(slice)
+fmt.Println(slice)
+sortSlice := sort.IntSlice([]int{2, 1, 10, 8, 30})
+ds.BubbleSortUsingSortPackage(sortSlice)
+fmt.Println(sortSlice)
 
-	// 插入排序
-	fmt.Println("插入排序")
-	slice = []int{2, 1, 10, 8, 30}
-	ds.InsertSort(slice)
-	fmt.Println(slice)
-	sortSlice = sort.IntSlice([]int{2, 1, 10, 8, 30})
-	ds.InsertSortUsingSortPackage(sortSlice)
-	fmt.Println(sortSlice)
+// 插入排序
+fmt.Println("插入排序")
+slice = []int{2, 1, 10, 8, 30}
+ds.InsertSort(slice)
+fmt.Println(slice)
+sortSlice = sort.IntSlice([]int{2, 1, 10, 8, 30})
+ds.InsertSortUsingSortPackage(sortSlice)
+fmt.Println(sortSlice)
 
-	// 简单选择排序
-	fmt.Println("简单选择排序")
-	slice = []int{2, 1, 10, 8, 30}
-	ds.SelectSort(slice)
-	fmt.Println(slice)
-	sortSlice = sort.IntSlice([]int{2, 1, 10, 8, 30})
-	ds.SelectSortUsingSortPackage(sortSlice)
-	fmt.Println(sortSlice)
+// 简单选择排序
+fmt.Println("简单选择排序")
+slice = []int{2, 1, 10, 8, 30}
+ds.SelectSort(slice)
+fmt.Println(slice)
+sortSlice = sort.IntSlice([]int{2, 1, 10, 8, 30})
+ds.SelectSortUsingSortPackage(sortSlice)
+fmt.Println(sortSlice)
 
-	// 快速排序
-	fmt.Println("快速排序")
-	slice = []int{2, 1, 10, 8, 30}
-	ds.QuickSort(slice, 0, len(slice)-1)
-	fmt.Println(slice)
+// 快速排序
+fmt.Println("快速排序")
+slice = []int{2, 1, 10, 8, 30}
+ds.QuickSort(slice, 0, len(slice)-1)
+fmt.Println(slice)
 
-	// 快速排序
-	fmt.Println("归并排序")
-	slice = []int{2, 1, 10, 8, 30}
-	slice = ds.MergeSort(slice)
-	fmt.Println(slice)
+// 快速排序
+fmt.Println("归并排序")
+slice = []int{2, 1, 10, 8, 30}
+slice = ds.MergeSort(slice)
+fmt.Println(slice)
 ```
