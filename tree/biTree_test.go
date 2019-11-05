@@ -25,13 +25,23 @@ func TestBiTree(t *testing.T) {
 	fmt.Println("这棵树的结点总数：", tree1.GetSize())
 
 	l := tree1.InOrderTraverse() //中序遍历
+	fmt.Println("中序遍历二叉树：")
 	for e := l.Front(); e != nil; e = e.Next() {
 		obj, _ := e.Value.(*biTreeNode)
-		fmt.Printf("data:%v\n", *obj)
+		fmt.Printf("%v\t", obj.data)
 	}
 	result := tree1.Find(6)
-	fmt.Printf("结点6的父节点数据：%v\n", result)
+	fmt.Printf("\n结点6的父节点数据：%v\n", result)
 	fmt.Println("树的高度：", tree1.GetHeight(), tree1.root.rChild.rChild.GetHeight())
 	fmt.Println("第三层结点的个数为：", tree1.GetKthNum(4))
 	fmt.Println("树的总叶子结点的个数为：", tree1.GetLeafNum())
+
+	// 层次遍历
+	l = tree1.BreadthFirstTraverse()
+	fmt.Println("层次遍历二叉树：")
+	for e := l.Front(); e != nil; e = e.Next() {
+		obj, _ := e.Value.(*biTreeNode)
+		fmt.Printf("%v\t", obj.data)
+	}
+	fmt.Println("")
 }

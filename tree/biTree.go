@@ -144,3 +144,22 @@ func postOrderTraverse(rt *biTreeNode, l *list.List) {
 	postOrderTraverse(rt.GetRChild(), l)
 	l.PushBack(rt)
 }
+
+//层次遍历(广度优先遍历), 并保存在链表里
+func (this *biTree) BreadthFirstTraverse() *list.List {
+	l := list.New()
+	nodes := []*biTreeNode{this.GetRoot()}
+	for len(nodes) > 0 {
+		curNode := nodes[0]
+		nodes = nodes[1:]
+		l.PushBack(curNode)
+		if curNode.HasLChild() {
+			nodes = append(nodes, curNode.GetLChild())
+		}
+		if curNode.HasRChild() {
+			nodes = append(nodes, curNode.GetRChild())
+		}
+	}
+
+	return l
+}

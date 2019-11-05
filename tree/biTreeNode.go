@@ -1,6 +1,10 @@
 package tree
 
-import "math"
+import (
+	"container/list"
+	"fmt"
+	"math"
+)
 
 // 二叉树结点
 type biTreeNode struct {
@@ -182,4 +186,135 @@ func (this *biTreeNode) SetSize() {
 	if this.HasParent() {
 		this.parent.SetSize() //递归更新祖先的规模
 	}
+}
+
+type Stack struct {
+	*list.List
+}
+
+//出栈
+func (s *Stack) Pop() interface{} {
+	if s == nil || s.Len() <= 0 {
+		return nil
+	}
+	value := s.Back()
+	s.Remove(value)
+	return value.Value
+}
+
+//进栈
+func (s *Stack) Push(d interface{}) {
+	if s == nil {
+		return
+	}
+	s.PushBack(d)
+}
+
+//获取栈顶元素
+func (s *Stack) Top() interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.Back().Value
+}
+
+func (tree *biTreeNode) String() string {
+	return fmt.Sprintf(" %v", tree.data)
+}
+
+/*  非递归前序遍历
+    根——>左——>右
+    1、从根节点开始访问，每访问一个元素，执行入栈操作并输出当前节点
+    2、访问到最左边的子节点时，开始出栈
+    3、每出栈一个元素需要该节点是否存在右节点，如果存在则重复操作1
+*/
+func (tree *biTreeNode) PreTraverse() (result string) {
+	if tree == nil {
+		return
+	}
+	stack := &Stack{
+		List: list.New(),
+	}
+
+	node := tree
+	for node != nil || stack.Len() > 0 {
+		if node != nil {
+			stack.Push(node)
+			result += node.String()
+			node = node.lChild
+		} else {
+			node = stack.Pop().(*biTreeNode)
+			node = node.rChild
+		}
+	}
+	return
+}
+
+/*  非递归中序遍历
+    左——>根——>右
+    1、从根节点开始遍历到最左边的子节点，每访问一个节点就入栈（此处用node访问每个节点）
+    2、访问到最左边的子节点时开始出栈，出栈时做输出操作
+    3、每次出栈一个元素，需要判断该元素是否存在右节点，如果存在，则重复步骤1
+*/
+func (tree *biTreeNode) MidTraverse() (result string) {
+	if tree == nil {
+		return
+	}
+
+	stack := &Stack{
+		List: list.New(),
+	}
+
+	node := tree
+	for node != nil || stack.Len() > 0 {
+		if node != nil {
+			stack.Push(node)
+			node = node.lChild
+		} else {
+			node = stack.Pop().(*biTreeNode)
+			result += node.String()
+			node = node.rChild
+		}
+	}
+	return
+}
+
+/*  非递归后续遍历
+    左——>右——>根
+    1、从根节点开始遍历到最左边的子节点，每访问一个节点就入栈（此处用node访问每个节点）
+    2、最后一个左子节点入栈后开始出栈操作，出栈时做输出操作
+    3、出栈条件：栈顶元素的右子节点为空或者右子节点已经出栈（此处用top纪录当前栈顶元素，last纪录最后出栈的元素）
+    4、如果栈顶元素的右子节点不为空且未出栈，则继续步骤1
+    为什么要纪录最后出站的元素？
+    如果一个节点同时存在左右子节点，按照后序遍历的规则，最后一个出栈元素为一定为该节点的右子节点，此时该节点的子节点已经遍历完，需要将该节点出
+    栈并输出
+*/
+func (tree *biTreeNode) PostTraverse() (result string) {
+	if tree == nil {
+		return
+	}
+
+	stack := &Stack{
+		List: list.New(),
+	}
+
+	node := tree
+	var topNode, lastNode *biTreeNode //top为栈顶元素、last为最后出栈的元素
+
+	for node != nil || stack.Len() > 0 {
+		if node != nil {
+			stack.Push(node)
+			node = node.lChild
+		} else {
+			topNode = stack.Top().(*biTreeNode)
+			if topNode.rChild == nil || topNode.rChild == lastNode {
+				stack.Pop()
+				result += topNode.String()
+				lastNode = topNode
+			} else {
+				node = topNode.rChild
+			}
+		}
+	}
+	return
 }
